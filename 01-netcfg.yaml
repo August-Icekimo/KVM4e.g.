@@ -1,0 +1,13 @@
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    enp5s0:
+      dhcp4: no
+  bridges:
+    br0:
+      interfaces: [enp5s0]
+      parameters:
+        stp: yes
+        forward-delay: 4
+      dhcp4: yes

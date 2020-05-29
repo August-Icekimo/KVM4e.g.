@@ -1,6 +1,7 @@
 <domain type='kvm'>
-  <name>win10p</name>
+  <name>Windows10</name>
   <uuid>0c56e629-914b-45d8-8915-22ce321f9596</uuid>
+  <title>Windows10</title>
   <memory unit='KiB'>6291456</memory>
   <currentMemory unit='KiB'>6291456</currentMemory>
   <vcpu placement='static' current='3'>4</vcpu>
@@ -141,7 +142,7 @@
     <input type='tablet' bus='usb'>
       <address type='usb' bus='0' port='1'/>
     </input>
-    <graphics type='spice' port='5900' autoport='no' listen='0.0.0.0' keymap='en-us'>
+    <graphics type='spice' port='-1' autoport='no' listen='0.0.0.0' keymap='en-us'>
       <listen type='address' address='0.0.0.0'/>
     </graphics>
     <sound model='ich6'>

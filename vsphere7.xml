@@ -41,12 +41,6 @@
       <boot order='2'/>
       <address type='drive' controller='0' bus='0' target='0' unit='1'/>
     </disk>
-    <disk type='file' device='disk'>
-      <driver name='qemu' type='qcow2'/>
-      <source file='/var/lib/libvirt/images/vsphere7.qcow2'/>
-      <target dev='sdc' bus='scsi'/>
-      <address type='drive' controller='0' bus='0' target='0' unit='2'/>
-    </disk>
     <controller type='usb' index='0' model='ich9-ehci1'>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x04' function='0x7'/>
     </controller>

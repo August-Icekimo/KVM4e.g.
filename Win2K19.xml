@@ -1,47 +1,17 @@
 <domain type='kvm'>
-  <name>win10-p</name>
-  <uuid>04d9c132-e45a-45ad-b986-49359413088c</uuid>
+  <name>Win2k19</name>
+  <uuid>68c1461b-3a8c-4431-a369-28c218aa9a1c</uuid>
   <metadata>
     <libosinfo:libosinfo xmlns:libosinfo="http://libosinfo.org/xmlns/libvirt/domain/1.0">
-      <libosinfo:os id="http://microsoft.com/win/10"/>
+      <libosinfo:os id="http://microsoft.com/win/2k16"/>
     </libosinfo:libosinfo>
   </metadata>
-  <memory unit='KiB'>8388608</memory>
-  <currentMemory unit='KiB'>8388608</currentMemory>
-  <vcpu placement='static'>6</vcpu>
-  <sysinfo type='smbios'>
-    <bios>
-      <entry name='vendor'>American Megatrends Inc.</entry>
-      <entry name='version'>N.1.05MRO02</entry>
-      <entry name='date'>06/04/2020</entry>
-    </bios>
-    <system>
-      <entry name='manufacturer'>MECHREVO</entry>
-      <entry name='product'>S2 Air Series PF4NU1F</entry>
-      <entry name='version'>Standard</entry>
-      <entry name='serial'>420066H32060420023</entry>
-      <entry name='sku'>0001</entry>
-      <entry name='family'>RENOIR</entry>
-    </system>
-    <baseBoard>
-      <entry name='manufacturer'>MECHREVO</entry>
-      <entry name='product'>PF4NU1F</entry>
-      <entry name='version'>Standard</entry>
-      <entry name='serial'>Standard</entry>
-      <entry name='asset'>Standard</entry>
-      <entry name='location'>Standard</entry>
-    </baseBoard>
-    <chassis>
-      <entry name='manufacturer'>MECHREVO</entry>
-      <entry name='version'>Standard</entry>
-      <entry name='serial'>Standard</entry>
-      <entry name='asset'>Standard</entry>
-      <entry name='sku'>Standard</entry>
-    </chassis>
-  </sysinfo>
+  <memory unit='KiB'>4194304</memory>
+  <currentMemory unit='KiB'>4194304</currentMemory>
+  <vcpu placement='static'>4</vcpu>
   <os>
     <type arch='x86_64' machine='pc-q35-4.2'>hvm</type>
-    <smbios mode='sysinfo'/>
+    <boot dev='hd'/>
   </os>
   <features>
     <acpi/>
@@ -49,16 +19,11 @@
     <hyperv>
       <relaxed state='on'/>
       <vapic state='on'/>
-      <spinlocks state='on' retries='4095'/>
-      <runtime state='on'/>
-      <reset state='on'/>
+      <spinlocks state='on' retries='8191'/>
     </hyperv>
-    <kvm>
-      <hidden state='on'/>
-    </kvm>
     <vmport state='off'/>
   </features>
-  <cpu mode='host-model' check='none'/>
+  <cpu mode='host-model' check='partial'/>
   <clock offset='localtime'>
     <timer name='rtc' tickpolicy='catchup'/>
     <timer name='pit' tickpolicy='delay'/>
@@ -76,16 +41,15 @@
     <emulator>/usr/bin/qemu-system-x86_64</emulator>
     <disk type='file' device='disk'>
       <driver name='qemu' type='qcow2'/>
-      <source file='/var/lib/libvirt/images/win10.qcow2'/>
-      <target dev='vda' bus='virtio'/>
-      <boot order='2'/>
-      <address type='pci' domain='0x0000' bus='0x08' slot='0x00' function='0x0'/>
+      <source file='/var/lib/libvirt/images/Win2k19.qcow2'/>
+      <target dev='sda' bus='sata'/>
+      <address type='drive' controller='0' bus='0' target='0' unit='0'/>
     </disk>
     <disk type='file' device='cdrom'>
       <driver name='qemu' type='raw'/>
+      <source file='/var/lib/libvirt/images/iso/SERVER2019_EVAL_x64FRE_en-us_1.iso'/>
       <target dev='sdb' bus='sata'/>
       <readonly/>
-      <boot order='1'/>
       <address type='drive' controller='0' bus='0' target='0' unit='1'/>
     </disk>
     <controller type='usb' index='0' model='qemu-xhci' ports='15'>
@@ -120,28 +84,11 @@
       <target chassis='5' port='0x14'/>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x4'/>
     </controller>
-    <controller type='pci' index='6' model='pcie-root-port'>
-      <model name='pcie-root-port'/>
-      <target chassis='6' port='0x15'/>
-      <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x5'/>
-    </controller>
-    <controller type='pci' index='7' model='pcie-to-pci-bridge'>
-      <model name='pcie-pci-bridge'/>
-      <address type='pci' domain='0x0000' bus='0x05' slot='0x00' function='0x0'/>
-    </controller>
-    <controller type='pci' index='8' model='pcie-root-port'>
-      <model name='pcie-root-port'/>
-      <target chassis='8' port='0x16'/>
-      <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x6'/>
-    </controller>
     <controller type='virtio-serial' index='0'>
       <address type='pci' domain='0x0000' bus='0x03' slot='0x00' function='0x0'/>
     </controller>
-    <controller type='scsi' index='0' model='virtio-scsi'>
-      <address type='pci' domain='0x0000' bus='0x06' slot='0x00' function='0x0'/>
-    </controller>
     <interface type='network'>
-      <mac address='52:54:00:09:15:46'/>
+      <mac address='52:54:00:41:ae:4c'/>
       <source network='default'/>
       <model type='e1000e'/>
       <address type='pci' domain='0x0000' bus='0x01' slot='0x00' function='0x0'/>
@@ -158,20 +105,13 @@
       <target type='virtio' name='com.redhat.spice.0'/>
       <address type='virtio-serial' controller='0' bus='0' port='1'/>
     </channel>
-    <channel type='unix'>
-      <target type='virtio' name='org.qemu.guest_agent.0'/>
-      <address type='virtio-serial' controller='0' bus='0' port='2'/>
-    </channel>
-    <input type='mouse' bus='ps2'/>
-    <input type='keyboard' bus='usb'>
-      <address type='usb' bus='0' port='5'/>
-    </input>
-    <input type='mouse' bus='usb'>
+    <input type='tablet' bus='usb'>
       <address type='usb' bus='0' port='1'/>
     </input>
+    <input type='mouse' bus='ps2'/>
     <input type='keyboard' bus='ps2'/>
-    <graphics type='spice' port='7778' autoport='no' listen='0.0.0.0'>
-      <listen type='address' address='0.0.0.0'/>
+    <graphics type='spice' autoport='yes'>
+      <listen type='address'/>
       <image compression='off'/>
     </graphics>
     <sound model='ich9'>
@@ -181,18 +121,11 @@
       <model type='qxl' ram='65536' vram='65536' vgamem='16384' heads='1' primary='yes'/>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x01' function='0x0'/>
     </video>
-    <video>
-      <model type='qxl' ram='65536' vram='65536' vgamem='16384' heads='1'/>
-      <address type='pci' domain='0x0000' bus='0x07' slot='0x01' function='0x0'/>
-    </video>
     <redirdev bus='usb' type='spicevmc'>
       <address type='usb' bus='0' port='2'/>
     </redirdev>
     <redirdev bus='usb' type='spicevmc'>
       <address type='usb' bus='0' port='3'/>
-    </redirdev>
-    <redirdev bus='usb' type='spicevmc'>
-      <address type='usb' bus='0' port='4'/>
     </redirdev>
     <memballoon model='virtio'>
       <address type='pci' domain='0x0000' bus='0x04' slot='0x00' function='0x0'/>
